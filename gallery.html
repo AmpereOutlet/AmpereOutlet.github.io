@@ -109,27 +109,31 @@ h6 {
   font-family: 'Montserrat', sans-serif;
  }
 
-img.bg {
-  /* Set rules to fill background */
-  min-height: 100%;
-  min-width: 1024px;
-	
-  /* Set up proportionate scaling */
-  width: 100%;
-  height: auto;
-	
-  /* Set up positioning */
-  position: fixed;
-  top: 0;
-  left: 0;
+#bg {
+  position: fixed; 
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
 }
+#bg img {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto; 
+  min-width: 50%;
+  min-height: 50%;
+  }
 }
 </style>
 </head>
 
 <body>
-<div style="background-image: url('images/new_background.jpg'); background-repeat: no-repeat; background-size: cover;
-	     background-position: 0% 0%; background-color: ##0000cc;">
+<div id="bg">
+  <img src="images/new_background.jpg" alt="">
+</div>
 
 <div class="header">
 <img src="images/ampere_logo.png" 
