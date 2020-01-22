@@ -63,7 +63,7 @@ h2 {
  }
 h4 {
   font: 100 15px 'Montserrat', sans-serif;
-  text-align: justify;
+  text-align: left;
   font-size: 18px; 
   color: #ffbcd9; 
   margin-left: 50px; margin-right: 50px; 
@@ -91,7 +91,7 @@ h2 {
  }
 h4 {
   font: 100 15px 'Montserrat', sans-serif;
-  text-align: justify;
+  text-align: left;
   font-size: 18px;
   color: #ffbcd9;
   width: 85%;
@@ -114,6 +114,21 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;  
   background-size: cover;
+}
+* {
+  box-sizing: border-box;
+}
+
+.img-container {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 }
 </style>
@@ -147,27 +162,25 @@ body {
 
 <h2> All Models: </h2>
 
-<div style="width:94%; padding-left:50px; align-content: center">
-<center>
-<figure style="background-image: url('images/Roadster.jpg'); background-size: cover">
-</figure>
-<figure style="background-image: url('images/Lucid.jpg'); background-size: cover">
-</figure>
-<figure style="background-image: url('images/Lotus.jpg'); background-size: cover">
-</figure>
-<figure style="background-image: url('images/Jaguar.jpeg'); background-size: cover">
-</figure>
-<figure style="background-image: url('images/Parade.jpeg'); background-size: cover">
-</figure>
-<figure style="background-image: url('images/DEHS_RoseBowlParade.jpeg'); background-size: cover">
-</figure>
-<figure style="background-image: url('images/another another maxres.jpg'); background-size: cover">
-</figure>
-<figure style="background-image: url('images/Blue and Gold.jpg'); background-size: cover">
-</figure>
-<figure style="background-image: url('images/maxresdefault.jpeg'); background-size: cover">
-</figure>
- </center>
+<div class="clearfix">
+  <div class="img-container">
+  <img src="TitleCar.jpg" alt="TitleCar" style="width:50%">
+  </div>
+  <div class="img-container">
+  <img src="Roadster.jpg" alt="Model1" style="width:50%">
+  </div>
+  <div class="img-container">
+  <img src="Lucid.jpg" alt="Model2" style="width:50%">
+  </div>
+</div>
+	
+<div class="clearfix">
+  <div class="img-container">
+  <img src="Lotus.jpg" alt="Model3" style="width:50%">
+  </div>
+  <div class="img-container">
+  <img src="Jaguar.jpeg" alt="Model4" style="width:50%">
+  </div>
 </div>
 	
 <br>
