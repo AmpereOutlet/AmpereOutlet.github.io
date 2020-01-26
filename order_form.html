@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title> Ampere </title>
+<link rel="icon" type="image/ico" href="favicon.ico" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+
+<style>
+/* Style the header: https://designshack.net/articles/css/the-10-best-script-and-handwritten-google-web-fonts/   */
+.header {
+   font: 100 20px 'Montserrat', sans-serif;
+   color: #db022a;
+   text-align: center;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 60px;
+   height: 100px;
+   width: 90%;
+   font-family: 'Montserrat', sans-serif;
+}
+/* The navbar container */
+.topnav {
+  font: 100 24px 'Montserrat', sans-serif;
+  height: 60px;
+  width: 90%;
+  text-align: center;
+  margin-left: 150px;
+  margin-top: 5px;
+  margin-bottom: 25px;
+  padding-left: 300px;
+  padding-top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+/* Navbar links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #db022a;
+  text-align: center;
+  padding: 8px 10px;
+  text-decoration: none;
+}
+/* Links - change color on hover */
+.topnav a:hover {
+  background-color: #6deddc ;
+  color: #8a6908;
+}
+@media only screen and (max-width: 720px) {
+h2 {
+  font: 100 40px 'Berkshire Swash', Helvetica, sans-serif;
+  color: #fce8ff;
+  margin-left: 50px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+ }
+h4 {
+  font: 100 25px 'Montserrat', sans-serif;
+  text-align: left;
+  font-size: 25px;
+  color: #560063;
+  margin-left: 50px; margin-right: 50px;
+  margin-bottom: 10px; margin-top: 10px;
+  font-family: 'Montserrat', sans-serif;
+ }
+h6 {
+  font: 100 15px 'Montserrat', sans-serif;
+  text-align: center;
+  font-size: 15px;
+  color: #E72F71;
+  margin-top:50px; margin-bottom:20px;
+  font-family: 'Montserrat', sans-serif;
+ }
+}
+@media only screen and (min-width: 720px) {
+h2 {
+  font: 100 40px 'Berkshire Swash', Helvetica, sans-serif;
+  color: #fce8ff;
+  margin-left: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+ }
+h4 {
+  font: 100 25px 'Montserrat', sans-serif;
+  text-align: left;
+  font-size: 25px;
+  color: #560063;
+  width: 85%;
+  margin-left: 100px; margin-right: 50px;
+  margin-right: 10px; margin-bottom: 10px;
+  font-family: 'Montserrat', sans-serif;
+ }
+h6 {
+  font: 100 15px 'Montserrat', sans-serif;
+  text-align: center;
+  font-size: 15px;
+  color: #E72F71;
+  margin-top:50px;
+  margin-bottom:20px;
+  font-family: 'Montserrat', sans-serif;
+ }
+body {
+  background-image: url('order_background.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+}
+
+</style>
+</head>
+
+<body>
+<div class="header">
+<img src="ampere_logo.png"
+	alt="Ampere Logo" align= "top"
+	 style="float:left; margin-bottom:20px; height: 200px; width: 150px; object-fit: contain;">
+</div>
+
+<div class="header" style="align-content: center; width:90%">
+	 <h1> <b> Ampere Order Form </b> </h1>
+</div>
+
+<br>
+
+<center>
+  <!–– https://precisiondrum.com/wp-content/uploads/2019/06/accepted-payments.jpg ––>
+ <img src="payments_logo.jpg" alt="missing PaymentsLogo.jpg" style="width:450px; height:150px; padding-left:25px; padding-right:25px; display: block; margin:10px;" >
+</center>
+
+<h2> <b> Payment Details </b> </h2>
+
+<script>
+function UpdateOrderPrice()
+{
+    var sPageURL = window.location.search.substring(1);
+    var sURLArguments = sPageURL.toString().split('?');
+    var sOrderVariables = sURLArguments.toString().split('&');
+    var type = '';
+    var price = 0;
+    var downpayment=0;
+    var termOfLeaseOrLoan = 0;
+    var milesPerYearForLease = 0;
+    var purchaseInfoFound = true;
+
+    for (var i = 0; i < sOrderVariables.length; i++)
+    {
+        var sParameterNames = sOrderVariables[i].split('=');
+        if (sParameterNames[0].toUpperCase() == 'TYPE')
+            type = sParameterNames[1];
+        else if (sParameterNames[0].toUpperCase() == 'PRICE')
+            price = sParameterNames[1];
+        else if (sParameterNames[0].toUpperCase() == 'DOWNPAYMENT')
+            downpayment = sParameterNames[1];
+        else if (sParameterNames[0].toUpperCase() == 'TERM')
+            termOfLeaseOrLoan = sParameterNames[1];
+        else if (sParameterNames[0].toUpperCase() == 'MILES')
+            milesPerYearForLease = sParameterNames[1];
+    }
+    if (type.toUpperCase() == "PURCHASE")
+        document.getElementById("priceInfo").textContent = "Total Purchase Price = $" + price;
+    else if (type.toUpperCase() == 'LOAN')
+        document.getElementById("priceInfo").textContent = "Monthly Loan Payment = $" + price + " (down payment: $" + downpayment + ", Loan term: " + termOfLeaseOrLoan + " months)";
+    else if (type.toUpperCase() == 'LEASE')
+        document.getElementById("priceInfo").textContent = "Monthly Lease Payment = $" + price + " (down payment: $" + downpayment + ", Lease term: " + termOfLeaseOrLoan + " months, " + milesPerYearForLease + " miles/year)";
+    else{
+      purchaseInfoFound = false;
+      document.getElementById("priceInfo").textContent = "Payment Details Not Available. Please Contact us to Place Order.";
+    }
+
+    if (purchaseInfoFound) {
+      document.querySelector('#div_place_order_button').insertAdjacentHTML('afterbegin',
+          `<div class="button">
+              <a  href="order_feedback.html">
+              <img src="order_online_button.png" alt="missing orderOnlineButton.png" style="width:300px; height:100px; display: block; margin:10px;" >
+           </div>`)
+    }
+}
+</script>
+
+<h4>
+<form>
+  Select Payment Type:
+  <select name="paymentType"  style="height:30px; width: 150px; font-size:12pt;">
+    <option value="visa">Visa</option>
+    <option value="master">Master Card</option>
+    <option value="discover">Discover Network</option>
+    <option value="amex">American Express</option>
+  </select>
+  <br><br>
+  Full Name on Credit Card (First Last):
+  <input type="text" name="fullName" style="height:30px; width: 350px; font-size:12pt;">
+  <br><br>
+  Credit Card Number:
+  <input type="text" name="cardNumber" style="height:30px; width: 200px; font-size:12pt;">
+  <br><br>
+  Credit Card Expiration (MM/YY):
+  <input type="text" name="cardExpMonth" style="height:30px; width: 30px; font-size:12pt;">
+  /
+  <input type="text" name="cardExpYear" style="height:30px; width: 30px; font-size:12pt;">
+   &nbsp; &nbsp; &nbsp; CVV: <input type="text" name="cardCVV" style="height:30px; width: 50px; font-size:12pt;">
+  <br><br><br>
+  Billing and Shipping Address: <br><br>
+  Full Name (First Last):
+  <input type="text" name="billingAddressName" style="height:30px; width: 250px; font-size:12pt;">
+  <br><br>
+  Street Address:
+  <input type="text" name="billingAddressStreet" style="height:30px; width: 250px; font-size:12pt;">
+  <br><br>
+  City:
+  <input type="text" name="billingAddressCity" style="height:30px; width: 200px; font-size:12pt;">
+
+  &nbsp; &nbsp; &nbsp;State:
+  <input type="text" name="billingAddressState" style="height:30px; width: 60px; font-size:12pt;">
+
+  &nbsp; &nbsp; &nbsp;Zip Code:
+  <input type="text" name="billingAddresZipCode" style="height:30px; width: 90px; font-size:12pt;">
+  <br><br>
+  Email Address:
+  <input type="text" name="emailAddress" style="height:30px; width: 300px; font-size:12pt;">
+
+  &nbsp; &nbsp; &nbsp;Phone Number:
+  <input type="text" name="contactNumber" style="height:30px; width: 150px; font-size:12pt;">
+  <br><br><br>
+
+  Specific Notes:<br><br>
+  <div>
+  <textarea name="message" rows="10" cols="200">
+    Enter any further instructions in here. We will contact you at the provided phone number.
+  </textarea>
+  </div>
+  <br>
+
+    <h5>
+      Estimated Delivery: 4-6 weeks.
+      By clicking "Place Order" I agree to the Ampere's Order Agreement, Supercharger Fair Use Policy, the Customer Privacy Agreement, and consent to be contacted at the number provided with more information or offers about Ampere products.
+    </h5> <br>
+
+    <center>
+    <button id="priceInfo" type="button" onclick="UpdateOrderPrice()" style=" font-size:14pt; width:525px; height:60px; padding-left:25px; padding-right:25px; display: block; margin:10px;"> Click to Verify Purchase/Lease/Loan Details! </button>
+      <br>
+      <!–– https://ziataqueria.com/wp-content/uploads/2019/07/orderonline-button.png ––>
+      <div id="div_place_order_button">
+      </div>
+      <br><br>
+    </center>
+
+</form>
+</h4>
+
+
+<br> <br> <br> <br>
+<a style= "font-family: 'Montserrat', sans-serif; font-size: 25px; align-content:middle; color: #9c7700; margin-left: 50px" href="index.html">GO BACK TO AMPERE</a>
+
+<br>
+
+<center>
+    <h6> Copyright © 2020 https://ampereoutlet.github.io/ </h6>
+</center>
+
+</body>
