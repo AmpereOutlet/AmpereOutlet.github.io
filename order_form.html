@@ -111,7 +111,7 @@ h6 {
   font-family: 'Montserrat', sans-serif;
  }
 body {
-  background-image: url('order_background.jpg');
+  background-image: url('images/order_background.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -119,28 +119,7 @@ body {
 }
 
 </style>
-</head>
-
-<body>
-<div class="header">
-<img src="ampere_logo.png"
-	alt="Ampere Logo" align= "top"
-	 style="float:left; margin-bottom:20px; height: 200px; width: 150px; object-fit: contain;">
-</div>
-
-<div class="header" style="align-content: center; width:90%">
-	 <h1> <b> Ampere Order Form </b> </h1>
-</div>
-
-<br>
-
-<center>
-  <!–– https://precisiondrum.com/wp-content/uploads/2019/06/accepted-payments.jpg ––>
- <img src="payments_logo.jpg" alt="missing PaymentsLogo.jpg" style="width:450px; height:150px; padding-left:25px; padding-right:25px; display: block; margin:10px;" >
-</center>
-
-<h2> <b> Payment Details </b> </h2>
-
+	
 <script>
 function UpdateOrderPrice()
 {
@@ -183,11 +162,32 @@ function UpdateOrderPrice()
       document.querySelector('#div_place_order_button').insertAdjacentHTML('afterbegin',
           `<div class="button">
               <a  href="order_feedback.html">
-              <img src="order_online_button.png" alt="missing orderOnlineButton.png" style="width:300px; height:100px; display: block; margin:10px;" >
+              <img src="images/order_online_button.png" alt="OrderOnlineButton image" style="width:300px; height:100px; display: block; margin:10px;" >
            </div>`)
     }
 }
 </script>
+</head>
+
+<body>
+<div class="header">
+<img src="images/ampere_logo.png"
+	alt="Ampere Logo" align= "top"
+	 style="float:left; margin-bottom:20px; height: 200px; width: 150px; object-fit: contain;">
+</div>
+
+<div class="header" style="align-content: center; width:90%">
+	 <h1> <b> Ampere Vehicle Order Form </b> </h1>
+</div>
+
+<br>
+
+<center>
+  <!–– https://precisiondrum.com/wp-content/uploads/2019/06/accepted-payments.jpg ––>
+ <img src="images/payments_logo.jpg" alt="PaymentTypes image" style="width:450px; height:150px; padding-left:25px; padding-right:25px; display: block; margin:10px;" >
+</center>
+
+<h2> <b> Payment Details </b> </h2>
 
 <h4>
 <form>
@@ -211,7 +211,7 @@ function UpdateOrderPrice()
   <input type="text" name="cardExpYear" style="height:30px; width: 30px; font-size:12pt;">
    &nbsp; &nbsp; &nbsp; CVV: <input type="text" name="cardCVV" style="height:30px; width: 50px; font-size:12pt;">
   <br><br><br>
-  Billing and Shipping Address: <br><br>
+  Billing/Shipping Address: <br><br>
   Full Name (First Last):
   <input type="text" name="billingAddressName" style="height:30px; width: 250px; font-size:12pt;">
   <br><br>
@@ -248,9 +248,8 @@ function UpdateOrderPrice()
     </h5> <br>
 
     <center>
-    <button id="priceInfo" type="button" onclick="UpdateOrderPrice()" style=" font-size:14pt; width:525px; height:60px; padding-left:25px; padding-right:25px; display: block; margin:10px;"> Click to Verify Purchase/Lease/Loan Details! </button>
+      <button id="priceInfo" type="button" onclick="UpdateOrderPrice()" style=" font-size:14pt; width:525px; height:60px; padding-left:25px; padding-right:25px; display: block; margin:10px;"> Click to Verify Purchase/Lease/Loan Details! </button>
       <br>
-      <!–– https://ziataqueria.com/wp-content/uploads/2019/07/orderonline-button.png ––>
       <div id="div_place_order_button">
       </div>
       <br><br>
