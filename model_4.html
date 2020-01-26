@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -67,6 +68,15 @@ font: 100 24px 'Montserrat', sans-serif;
   background-color: teal;
 }
 @media only screen and (max-width: 720px) {
+h1 {
+  font: 100 35px 'Berkshire Swash', Helvetica, sans-serif;
+  color: #f6f6f6;
+  margin-left: 50px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding-top: 10px;
+  padding-bottom: 5px;	
+ }
 h2 {
   font: 100 30px 'Berkshire Swash', Helvetica, sans-serif;
   color: #f2f2f2;
@@ -95,6 +105,15 @@ h6 {
  }
 }
 @media only screen and (min-width: 720px) {
+h1 {
+  font: 100 35px 'Berkshire Swash', Helvetica, sans-serif;
+  color: #f6f6f6;
+  margin-left: 50px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding-top: 10px;
+  padding-bottom: 5px;	
+ }
 h2 {
   font: 100 30px 'Berkshire Swash', Helvetica, sans-serif;
   color: #f2f2f2;
@@ -161,38 +180,62 @@ body {
 </center>
 	
 <center>	
-<div class="header" style=" font-size: 40; align-content: center; width:90%">
-	 <h1> Specs </h1>
-</div>
+	 <h1> Vehicle Specifications </h1>
 </center>
 	
-<h2> Battery Type </h2>
-<h4> 60 kWh Lithium-Ion Battery </h4>
-<h2> Range </h2>
-<h4> 270 miles </h4>
-<h2> Acceleration </h2>
-<h4> 0-60 mph in less than 6 seconds </h4>
-<h2> Drive </h2>
-<h4> Rear-Wheel Drive </h4>	
-	
-<br><br>
-	
-<div class="header" style="align-content: center; width:90%">
-	 <h1> Interior Features </h1>
-</div>	
-<h2> Seating Capacity </h2>
-<h4> 5 Adults </h4>
-<h2> Seats </h2>
+<h2> Default Interior Options </h2>	
+<h4> Seating Capacity: 5 Adults </h4>
 <h4> Front adjustable seats</h4>
-<h4> Premium leather material </h4>
 <h4> 4 USB ports  </h4>
-<h2> Sound </h2>
-<h4> Front and rear speakers </h4>
 <h4> Bluetooth connection </h4>	
 
-	
-	
-	
+<h2> Battery Type </h2>
+<h4> 60 kWh Lithium-Ion Battery </h4>
+<h2> Wheel Rims </h2>
+<h4> Alloy Wheels to offer best for performance.</h2>
+<h2> Top Speed </h2>
+<h4> 150 mph </h4>
+<h2> Range </h2>
+<h4> 200 miles </h4>
+<h2> Acceleration </h2>
+<h4> 0-60 mph in less than 6 seconds </h4>
+<h2> Purchase Price </h2>
+<h4> $65000 (extra options could vary price)</h2>
+<br><br>
+
+
+<h2> Select Options </h2>
+<form>
+	<h4>Color Choice:
+	  <select name="colorChoice"  style="height:30px; width: 150px; font-size:12pt;">
+		<option value="silver">Silver Metallic</option>
+		<option value="blue">Dark Black</option>
+		<option value="blue">Perl White</option>
+		<option value="blue">Grey</option>
+		<option value="red">Red</option>
+		<option value="blue">Blue Metallic</option>
+		<option value="green">Dark Green</option>
+	  </select>
+	</h4>
+
+    <h4>Drivetrain Type:
+	  <select name="driveType"  style="height:30px; width: 150px; font-size:12pt;">
+		<option value="awd">All Wheel Drive (20" Performsnce Wheels)</option>
+		<option value="awd">All Wheel Drive (19" Sports Wheels)</option>
+		<option value="rwd">Rear Wheel Drive (18" Aero Wheels)</option>
+	  </select>
+  </h4>
+
+  <h4>Interior Type:
+	  <select name="wheelType"  style="height:30px; width: 150px; font-size:12pt;">
+		<option value="interiorBlack">All Black</option>
+		<option value="interiorBlend">Black and White </option>
+		<option value="interiorBlend">Black and Red </option>
+		<option value="interiorBlend">Black and Grey </option>
+	  </select>
+  </h4>
+
+</form>	
 
 <center>	
 <div  class="button">
