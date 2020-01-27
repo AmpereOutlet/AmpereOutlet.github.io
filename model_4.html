@@ -4,7 +4,7 @@
 
 <head>
 <title>Ampere</title>
-<link rel="icon" type="image/ico" href="favicon.ico" />
+<link rel="icon" type="image/ico" href="favicon.ico?v=1.0" />
 <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
@@ -68,15 +68,6 @@ font: 100 24px 'Montserrat', sans-serif;
   background-color: teal;
 }
 @media only screen and (max-width: 720px) {
-h1 {
-  font: 100 35px 'Berkshire Swash', Helvetica, sans-serif;
-  color: #f6f6f6;
-  margin-left: 50px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  padding-top: 10px;
-  padding-bottom: 5px;	
- }
 h2 {
   font: 100 30px 'Berkshire Swash', Helvetica, sans-serif;
   color: #f2f2f2;
@@ -105,15 +96,6 @@ h6 {
  }
 }
 @media only screen and (min-width: 720px) {
-h1 {
-  font: 100 35px 'Berkshire Swash', Helvetica, sans-serif;
-  color: #f6f6f6;
-  margin-left: 50px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  padding-top: 10px;
-  padding-bottom: 5px;	
- }
 h2 {
   font: 100 30px 'Berkshire Swash', Helvetica, sans-serif;
   color: #f2f2f2;
@@ -154,43 +136,54 @@ body {
 var bOrderButtonCreated= false;
 function UpdatePricePlanDetails()
 {
-    if (bOrderButtonCreated)
-		return;
-    bOrderButtonCreated = true;
     var type = 'purchase';
     var price = 75000;
-	var loanMonths = 60
-	var leaseMonths = 36
-	var milesPerYear = 10000;
+    var loanMonths = 60;
+    var leaseMonths = 36;
+    var milesPerYear = 10000;
     var totalPrice = price;
+	var purchaseInfoFound = true;
 
-	var e = document.getElementById("purchasePlan");
-	var purchaseType = e.options[e.selectedIndex].value;
-	var text = e.options[e.selectedIndex].text;
-
-	var checkoutURL = "order_form.html?type=" + purchaseType;
-
+    var e = document.getElementById("purchasePlan");
+    var purchaseType = e.options[e.selectedIndex].value;
+    var textDescription = e.options[e.selectedIndex].text;
+    var checkoutURL = "order_form.html?type=" + purchaseType;
 	if (purchaseType.toUpperCase() == "PURCHASE") {
 		price = totalPrice;
 		checkoutURL = checkoutURL + "&price=" + price;
-	}
-	else if (purchaseType.toUpperCase() == "LOAN") {
+		document.getElementById("purchasePlanDetails").textContent = "Total Purchase Price: $" + price;
+	} else if (purchaseType.toUpperCase() == "LOAN") {
 		var downpayment = Math.round(20.0/100.0*totalPrice);
-		var interest = (totalPrice-downpayment)*2.99/100
-		price = Math.round((totalPrice+interest-downpayment)/60);
-		checkoutURL = checkoutURL  + "&price=" +  price + "&downpayment=" + downpayment + "&term="+loanMonths;
-	}
-	else if (purchaseType.toUpperCase() == "LEASE") {
+		var interestPeriodic = 3.0/100.0/loanMonths;
+		var discountFactor = (Math.pow((1 + interestPeriodic),loanMonths) - 1) / (interestPeriodic*Math.pow((1 + interestPeriodic),loanMonths));
+		if (discountFactor <= 0) {
+		    alert('Please contact us for payment details');
+			discountFactor = 1
+		}
+		price = Math.round((totalPrice-downpayment)/discountFactor);
+		checkoutURL = checkoutURL  + "&price=" +  price + "&downpayment:" + downpayment + "&term:" + loanMonths;
+        document.getElementById("purchasePlanDetails").textContent = "Monthly Loan Payment: $" + price + " (down payment: $" + downpayment + ", term: " + loanMonths + " months)";
+	} else if (purchaseType.toUpperCase() == "LEASE") {
 		var downpayment = Math.round(10.0/100.0*totalPrice);
-		var interest = (totalPrice-downpayment)*4.99/100
-		price = Math.round((totalPrice*0.5+interest-downpayment)/36);
-		checkoutURL = checkoutURL  + "&price=" +  price + "&downpayment=" + downpayment  + "&term="+leaseMonths + "&miles=" + milesPerYear;
+		var residualValue = Math.round(55.0/100.0*totalPrice*15.0/100.0); // sticker price is 15% more than sale price
+		price = Math.round((totalPrice-downpayment-residualValue)/leaseMonths);
+		checkoutURL = checkoutURL  + "&price=" +  price + "&downpayment=" + downpayment  + "&term=" + leaseMonths + "&miles=" + milesPerYear;
+        document.getElementById("purchasePlanDetails").textContent = "Monthly Lease Payment: $" + price + " (down payment: $" + downpayment + ", term: " + leaseMonths + " months, includes: " + milesPerYear + " miles/year";
+	} else {
+      purchaseInfoFound = false;
+      document.getElementById("purchasePlanDetails").textContent = "Payment Details Not Available. Please Contact us to Place Order.";
+    }
+	//Remove previously added child button to recreate with updated checkoutURL
+	if (bOrderButtonCreated) {
+	    var checkoutDivElm = document.getElementById("div_add_checkout_button");
+		checkoutDivElm.removeChild(checkoutDivElm.firstChild);
 	}
-	alert(checkoutURL)
-    document.querySelector('#div_add_checkout_button').insertAdjacentHTML('afterbegin',
-        '<div class="button">\
-		<a href=' + checkoutURL +'>Check Out</a>\
-		</div>')
+	//Create Check Out button to take to the customer to online order form
+	document.querySelector('#div_add_checkout_button').insertAdjacentHTML('afterbegin',
+               '<div class="button">\
+		            <a href=' + checkoutURL +'>Check Out</a>\
+		        </div>');
+	bOrderButtonCreated = true;
 }
 </script>
 
@@ -224,7 +217,7 @@ function UpdatePricePlanDetails()
 </center>
 	
 <center>	
-	 <h1> Vehicle Specifications </h1>
+	 <h2> Vehicle Specifications </h2>
 </center>
 	
 <h2> Default Interior Options </h2>	
@@ -247,10 +240,9 @@ function UpdatePricePlanDetails()
 <h4> $65000 (extra options could vary price)</h2>
 <br><br>
 
-
 <h2>  Custom Options </h2>
 <form>
-   <h4>Exterior Color:
+  <h4>Exterior Color:
   <select name="colorChoice"  style="height:30px; width: 150px; font-size:12pt;">
 	<option value="silver">Silver Metallic</option>
 	<option value="red">Red Metallic</option>
@@ -260,9 +252,9 @@ function UpdatePricePlanDetails()
 	<option value="grey">Grey</option>
 	<option value="black">Black</option>
   </select>
-    </h4>
+  </h4>
 
-    <h4>Drivetrain Type:
+  <h4>Drivetrain Type:
   <select name="driveType"  style="height:30px; width: 350px; font-size:12pt;">
 	<option value="awd">All Wheel Drive (20" Performance Wheels)</option>
 	<option value="awd">All Wheel Drive (19" Sports Wheels)</option>
@@ -281,20 +273,21 @@ function UpdatePricePlanDetails()
   <h4>Purchase Options:
   <select id="purchasePlan"  style="height:30px; width: 250px; font-size:12pt;">
 	<option value="purchase">Pay Full Purchase Price</option>
-	<option value="loan">Pay Monthly Loan Amount (5yrs at 3.5% APY, down: $10000) </option>
-	<option value="lease">Pay Monthly Lease Amount (3yrs at 4.99% APY, down:$6000, 10K miles/year)  </option>
+	<option value="loan">Pay Monthly Loan Amount (60months at 3.5% APY, downpayment: 20%) </option>
+	<option value="lease">Pay Monthly Lease Amount (36months, downpayment:10%, 10K miles/year)  </option>
   </select>
   </h4>
 
 </form>	
 
 <h2> Final Purchase Details </h2>
-    <center>
-	<button id="agree_button" type="button" onclick="UpdatePricePlanDetails()" style=" font-size:14pt; width:525px; height:60px; padding-left:25px; padding-right:25px; display: block; margin:10px;"> Click for Updated Pricing Details! </button>
+   <center>
+	<button id="agree_button" type="button" onclick="UpdatePricePlanDetails()" style=" font-size:14pt; width:300px; height:60px; display: block; margin:10px;"> Click to See Updated Purchase Details </button>
 	<br>
-	<div id="div_add_checkout_button">
-	</div>
-    </center>
+    <div id="purchasePlanDetails" style="font-size:14pt; font-weight:bold"></div>
+	<br>
+	<div id="div_add_checkout_button"></div>
+   </center>
 	
 <br>
 <a style= "font-family: 'Montserrat', sans-serif; font-size: 15px; float:left; color: #C891FF; margin-left: 50px" href="east.html">GO TO OUR SCHOOL PAGE</a>
@@ -306,3 +299,4 @@ function UpdatePricePlanDetails()
  </center>
 
 </body>
+</html>
