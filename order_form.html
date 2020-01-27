@@ -1,10 +1,11 @@
 
+
 <!DOCTYPE html>
 <html>
 
 <head>
 <title> Ampere </title>
-<link rel="icon" type="image/ico" href="favicon.ico" />
+<link rel="icon" type="image/ico" href="favicon.ico?v=1.0" />
 <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
@@ -152,11 +153,11 @@ function UpdateOrderPrice()
             milesPerYearForLease = sParameterNames[1];
     }
     if (type.toUpperCase() == "PURCHASE")
-        document.getElementById("priceInfo").textContent = "Total Purchase Price = $" + price;
+        document.getElementById("priceInfo").textContent = "Total Purchase Price: $" + price;
     else if (type.toUpperCase() == 'LOAN')
-        document.getElementById("priceInfo").textContent = "Monthly Loan Payment = $" + price + " (down payment: $" + downpayment + ", Loan term: " + termOfLeaseOrLoan + " months)";
+        document.getElementById("priceInfo").textContent = "Monthly Loan Payment: $" + price + " (down payment: $" + downpayment + ", term: " + termOfLeaseOrLoan + " months)";
     else if (type.toUpperCase() == 'LEASE')
-        document.getElementById("priceInfo").textContent = "Monthly Lease Payment = $" + price + " (down payment: $" + downpayment + ", Lease term: " + termOfLeaseOrLoan + " months, " + milesPerYearForLease + " miles/year)";
+        document.getElementById("priceInfo").textContent = "Monthly Lease Payment: $" + price + " (down payment: $" + downpayment + ", term: " + termOfLeaseOrLoan + " months, includes: " + milesPerYearForLease + " miles/year)";
     else{
       purchaseInfoFound = false;
       document.getElementById("priceInfo").textContent = "Payment Details Not Available. Please Contact us to Place Order.";
@@ -251,10 +252,11 @@ function UpdateOrderPrice()
     </h5> <br>
 
     <center>
-      <button id="priceInfo" type="button" onclick="UpdateOrderPrice()" style=" font-size:14pt; width:525px; height:60px; padding-left:25px; padding-right:25px; display: block; margin:10px;"> Click to Place Order! </button>
-      <br>
-      <div id="div_place_order_button">
-      </div>
+      <button id="priceInfoReview" type="button" onclick="UpdateOrderPrice()" style=" font-size:14pt; width:300px; height:60px; display: block; margin:10px;"> Click to Review Purchase Details </button>
+	  <br>
+		<div id="priceInfo" style="font-size:14pt; font-weight:bold"></div>
+	  <br>
+      <div id="div_place_order_button"> </div>
     </center>
 
 </form>
@@ -269,3 +271,4 @@ function UpdateOrderPrice()
 </center>
 
 </body>
+</html>
