@@ -4,7 +4,7 @@
 
 <head>
 <title>Ampere</title>
-<link rel="icon" type="image/ico" href="favicon.ico?v=1.0" />
+<link rel="icon" type="image/ico" href="favicon.ico?v=1.0" >
 <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
@@ -136,23 +136,49 @@ body {
 var bOrderButtonCreated= false;
 function UpdatePricePlanDetails()
 {
-    var type = 'purchase';
-    var price = 75000;
+    var purchaseType = 'purchase';
+    var price = 125000;
     var loanMonths = 60;
     var leaseMonths = 36;
     var milesPerYear = 10000;
     var totalPrice = price;
 	var purchaseInfoFound = true;
+	//Update price, when custom options are selected
+	var e = document.getElementById("colorChoice");
+	var colorChoice = e.options[e.selectedIndex].value;
+	e = document.getElementById("driveType");
+	var driveType = e.options[e.selectedIndex].value;
+	e = document.getElementById("interiorLeather");
+	var interiorLeather = e.options[e.selectedIndex].value;
+	//color options
+    if (colorChoice == "red")
+		totalPrice += 500
+	else if (colorChoice == "blue")
+		totalPrice += 250
+	else if (colorChoice == "silver")
+		totalPrice += 100
+	//driveTran options
+    if (driveType == "awd20")
+		totalPrice += 1000    
+    else if (driveType == "awd19")
+		totalPrice += 500
+	//interior choice
+    if (interiorLeather == "interiorBlendedRed")
+		totalPrice += 500
+	else if (interiorLeather == "interiorBlendGrey")
+		totalPrice += 250
+	else if (interiorLeather == "interiorBlendedWhite")
+		totalPrice += 100
 
-    var e = document.getElementById("purchasePlan");
-    var purchaseType = e.options[e.selectedIndex].value;
-    var textDescription = e.options[e.selectedIndex].text;
+	e = document.getElementById("purchasePlan");
+    purchaseType = e.options[e.selectedIndex].value;
+    //var textDescription = e.options[e.selectedIndex].text;
     var checkoutURL = "order_form.html?type=" + purchaseType;
-	if (purchaseType.toUpperCase() == "PURCHASE") {
+	if (purchaseType == "purchase") {
 		price = totalPrice;
 		checkoutURL = checkoutURL + "&price=" + price;
 		document.getElementById("purchasePlanDetails").textContent = "Total Purchase Price: $" + price;
-	} else if (purchaseType.toUpperCase() == "LOAN") {
+	} else if (purchaseType == "loan") {
 		var downpayment = Math.round(20.0/100.0*totalPrice);
 		var interestPeriodic = 3.0/100.0/loanMonths;
 		var discountFactor = (Math.pow((1 + interestPeriodic),loanMonths) - 1) / (interestPeriodic*Math.pow((1 + interestPeriodic),loanMonths));
@@ -163,7 +189,7 @@ function UpdatePricePlanDetails()
 		price = Math.round((totalPrice-downpayment)/discountFactor);
 		checkoutURL = checkoutURL  + "&price=" +  price + "&downpayment:" + downpayment + "&term:" + loanMonths;
         document.getElementById("purchasePlanDetails").textContent = "Monthly Loan Payment: $" + price + " (down payment: $" + downpayment + ", term: " + loanMonths + " months)";
-	} else if (purchaseType.toUpperCase() == "LEASE") {
+	} else if (purchaseType == "lease") {
 		var downpayment = Math.round(10.0/100.0*totalPrice);
 		var residualValue = Math.round(55.0/100.0*totalPrice*15.0/100.0); // sticker price is 15% more than sale price
 		price = Math.round((totalPrice-downpayment-residualValue)/leaseMonths);
@@ -243,31 +269,31 @@ function UpdatePricePlanDetails()
 <h2>  Custom Options </h2>
 <form>
   <h4>Exterior Color:
-  <select name="colorChoice"  style="height:30px; width: 150px; font-size:12pt;">
-	<option value="silver">Silver Metallic</option>
-	<option value="red">Red Metallic</option>
-	<option value="blue">Blue Metallic</option>
-	<option value="green">Dark Green</option>
-	<option value="blue">Pearl White</option>
+  <select id="colorChoice"  style="height:30px; width: 150px; font-size:12pt;">
 	<option value="grey">Grey</option>
 	<option value="black">Black</option>
+	<option value="green">Dark Green</option>
+	<option value="blue">Pearl White</option>
+	<option value="silver">Silver Metallic (+$100)</option>
+	<option value="blue">Blue Metallic (+$250)</option>
+	<option value="red">Red Metallic (+$500)</option>
   </select>
   </h4>
 
   <h4>Drivetrain Type:
-  <select name="driveType"  style="height:30px; width: 350px; font-size:12pt;">
-	<option value="awd">All Wheel Drive (20" Performance Wheels)</option>
-	<option value="awd">All Wheel Drive (19" Sports Wheels)</option>
+  <select id="driveType"  style="height:30px; width: 350px; font-size:12pt;">
 	<option value="rwd">Rear Wheel Drive (18" Aero Wheels)</option>
+	<option value="awd19">All Wheel Drive (19" Sports Wheels) (+$500)</option>
+	<option value="awd20">All Wheel Drive (20" Performance Wheels) (+$1000)</option>
   </select>
   </h4>
 
   <h4>Interior Leather:
-  <select name="wheelType"  style="height:30px; width: 150px; font-size:12pt;">
+  <select id="interiorLeather"  style="height:30px; width: 150px; font-size:12pt;">
 	<option value="interiorBlack">All Black</option>
-	<option value="interiorBlend">Black and White </option>
-	<option value="interiorBlend">Black and Red </option>
-	<option value="interiorBlend">Black and Grey </option>
+	<option value="interiorBlendedWhite">Black and White (+$100)</option>
+	<option value="interiorBlendedGrey">Black and Grey (+$250)</option>
+	<option value="interiorBlendedRed">Black and Red (+$500)</option>
   </select>
   </h4>
   <h4>Purchase Options:
